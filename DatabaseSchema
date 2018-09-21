@@ -1,0 +1,18 @@
+CREATE TABLE locations (
+    id INTEGER PRIMARY KEY, 
+    name VARCHAR(255)
+);
+
+CREATE TABLE types (
+    id INTEGER PRIMARY KEY, 
+    type varchar(255)
+);
+
+CREATE TABLE jobs (
+    vacancy VARCHAR(255),
+    team VARCHAR(255),
+    employmentId INTEGER,
+    locationId INTEGER,
+    FOREIGN KEY (employmentId) REFERENCES types (id),
+    FOREIGN KEY (locationId) REFERENCES location (id)
+);
