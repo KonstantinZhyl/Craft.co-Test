@@ -13,7 +13,7 @@ def create_connection(db_file):
         conn.close()
 
 
-create_connection(r"C:\sqlite\db\jobs.db")            # creating database
+create_connection(r"C:\sqlite\db\jobs.db")            # creating database using that path
 conn = sqlite3.connect("C:\sqlite\db\jobs.db")
 mycursor = conn.cursor()
 
