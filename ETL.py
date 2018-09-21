@@ -13,7 +13,7 @@ def create_connection(db_file):
         conn.close()
 
 
-create_connection(r"C:\sqlite\db\jobs.db")
+create_connection(r"C:\sqlite\db\jobs.db")            # creating database
 conn = sqlite3.connect("C:\sqlite\db\jobs.db")
 mycursor = conn.cursor()
 
@@ -37,17 +37,17 @@ with open(sys.argv[-1], 'r') as csvfile:
     for row in spamreader:
         if row:
             val.append(row)
-val = val[1:]
+val = val[1:]                 # remove titles
 
-types = list({x[2] for x in val})
+types = list({x[2] for x in val})              # makes another list of all possible types
 sql = """INSERT INTO types VALUES (?, ?)"""
 mycursor.executemany(sql, [[i, types[i]] for i in range(len(types))])
 
-locations = list({x[3] for x in val})
+locations = list({x[3] for x in val})           # makes another list of all possible locations
 sql = """INSERT INTO locations VALUES (?, ?)"""
 mycursor.executemany(sql, [[i, locations[i]] for i in range(len(locations))])
 
-for value in val:
+for value in val:                                  #changing location name and type to there id
     value[2] = types.index(value[2])
     value[3] = locations.index(value[3])
 
