@@ -9,8 +9,10 @@ def jobs_location(variable):
     variable = variable.replace('_', ' ')
     conn = sqlite3.connect(r"C:\sqlite\db\jobs.db")     # here my path to database
     mycursor = conn.cursor()
-    mycursor.execute(f"SELECT vacancy, team, types.type, locations.name FROM jobs INNER JOIN locations ON jobs.locationId=locations.id \
-                        INNER JOIN types ON types.id=jobs.employmentId WHERE locations.name='{variable}'")
+    mycursor.execute(f"SELECT vacancy, team, types.type, locations.name FROM jobs \
+                        INNER JOIN locations ON jobs.locationId=locations.id \
+                        INNER JOIN types ON types.id=jobs.employmentId \
+                        WHERE locations.name='{variable}'")
     myresult = mycursor.fetchall()
     conn.close()
     return "\n".join([", ".join(x) for x in myresult])
